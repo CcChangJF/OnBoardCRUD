@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/semantic/dist/semantic.min.css" rel="stylesheet" />
+</head>
+<body>
+        <div class="ui borderless inverted top main menu fixed">
+            <div class="ui container left">
+                <a class="item" href="/Home/Index">Onboard Programme</a>
+                <a class="item" href="/Customer/Index">Customer</a>
+                <a class="item" href="/Store/Index">Stores</a>
+                <a class="item" href="/Product/Index">Products</a>
+                <a class="item" href="/Sales/Index">Sales</a>
+            </div>
+        </div>
+        <div class="pusher" style="padding-top:50px" />
+        <div class="ui container " >
+            @RenderBody()
+            <hr />
+           <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script src="~/semantic/dist/semantic.min.js"></script>
+</body>
+</html>
