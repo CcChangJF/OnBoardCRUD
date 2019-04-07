@@ -101,18 +101,11 @@ export class EditStoreModal extends React.Component {
     }
 
     componentDidMount() {
-        let storeName = this.props.store.Name;
-        let storeAddr = this.props.store.Address;
-        if (!storeAddr) {
-            storeAddr = "";
-        }
-        this.setState({
-            Name: storeName,
-            Address: storeAddr
-        });
     }
 
     render() {
+        let storeName = this.props.store.Name;
+        let storeAddr = this.props.store.Address;
         return (
             <div className="ui small modal" id={this.props.id}>
                 <i className="close icon" />
@@ -123,12 +116,12 @@ export class EditStoreModal extends React.Component {
                     <div className="ui segment">
                         <div className="field">
                             <label>Name</label>
-                            <input type="text" id="EditName" name="Name" value={this.state.Name}
+                            <input type="text" id="EditName" name="Name" value={storeName}
                                 onChange={event => this.handleInputChange(event)} />
                         </div>
                         <div className="field">
                             <label>Address</label>
-                            <input type="text" id="EditAddress" name="Address" value={this.state.Address}
+                            <input type="text" id="EditAddress" name="Address" value={storeAddr}
                                 onChange={event => this.handleInputChange(event)} />
                         </div>
                     </div>

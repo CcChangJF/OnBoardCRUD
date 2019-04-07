@@ -287,7 +287,6 @@ export class EditSalesModal extends React.Component {
     }
 
     handleCustomerChange(value) {
-        alert(value);
         this.setState({ CustomerId: value });
     }
 
@@ -300,6 +299,7 @@ export class EditSalesModal extends React.Component {
     }
 
     render() {
+        let salesDate = this.props.sales.DateSold;
         return (
             <div className="ui small modal" id={this.props.id}>
                 <i className="close icon" />
@@ -311,7 +311,7 @@ export class EditSalesModal extends React.Component {
                         <div className="field">
                             <label> Date &nbsp; </label>
                             <Datepicker 
-                                selected={this.state.curDate}
+                                selected={salesDate}
                                 onChange={(date) => this.handleDateChange(date)} />
                         </div>
 

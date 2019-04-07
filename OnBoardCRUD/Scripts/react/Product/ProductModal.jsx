@@ -101,18 +101,12 @@ export class EditProductModal extends React.Component {
     }
 
     componentDidMount() {
-        let productName = this.props.product.Name;
-        let productPrice = this.props.product.Price;
-        if (!productPrice) {
-            productPrice = "";
-        }
-        this.setState({
-            Name: productName,
-            Price: productPrice
-        });
+        
     }
 
     render() {
+        let productName = this.props.product.Name;
+        let productPrice = this.props.product.Price;
         return (
             <div className="ui small modal" id={this.props.id}>
                 <i className="close icon" />
@@ -123,12 +117,12 @@ export class EditProductModal extends React.Component {
                     <div className="ui segment">
                         <div className="field">
                             <label className="Big">Name</label>
-                            <input type="text" id="EditName" name="Name" value={this.state.Name}
+                            <input type="text" id="EditName" name="Name" value={productName}
                                 onChange={event => this.handleInputChange(event)} />
                         </div>
                         <div className="field">
                             <label>Price</label>
-                            <input type="text" id="EditPrice" name="Price" value={this.state.Price}
+                            <input type="text" id="EditPrice" name="Price" value={productPrice}
                                 onChange={event => this.handleInputChange(event)} />
                         </div>
                     </div>
