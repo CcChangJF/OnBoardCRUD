@@ -24,6 +24,7 @@ export class StoreTable extends React.Component {
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.add = this.add.bind(this);
+        this.editStoreModalRef = React.createRef();
     }
 
     componentDidMount() {
@@ -69,8 +70,10 @@ export class StoreTable extends React.Component {
 
     update(store) {
         const editModal = <EditStoreModal id={"store_Edit_Modal"}
+            ref={this.editStoreModalRef}
             store={store} updateTableData={() => this.loadData()} />;
         ReactDOM.render(editModal, document.getElementById('edit_Modal_Div'));
+        this.editStoreModalRef.current.updateNameAddr(store);
         $('#store_Edit_Modal').modal('show');
     }
 

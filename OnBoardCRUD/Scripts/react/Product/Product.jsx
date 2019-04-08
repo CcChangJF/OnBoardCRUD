@@ -24,6 +24,7 @@ export class ProductTable extends React.Component {
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.add = this.add.bind(this);
+        this.editProductModalRef = React.createRef();
     }
 
     componentDidMount() {
@@ -69,8 +70,10 @@ export class ProductTable extends React.Component {
 
     update(product) {
         const editModal = <EditProductModal id={"product_Edit_Modal"}
+            ref={this.editProductModalRef}
             product={product} updateTableData={() => this.loadData()} />;
         ReactDOM.render(editModal, document.getElementById('edit_Modal_Div'));
+        this.editProductModalRef.current.updateState(product);
         $('#product_Edit_Modal').modal('show');
     }
 

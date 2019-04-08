@@ -16,8 +16,7 @@ export class AddSalesModal extends React.Component {
             curDate: new Date()
         }
         this.handleCreateSales = this.handleCreateSales.bind(this);
-        //const customerOptions = customers.map(item =>
-        //    ({ key: item.Id, value: item.Id, text: item.Name }));
+        this.dateRef = React.createRef();
     }
 
     componentDidMount() {
@@ -25,9 +24,12 @@ export class AddSalesModal extends React.Component {
         this.getStoreData();
         this.getProductData();
         this.handleDateChange(new Date());
-        this.refs.dateDropdown.cancelFocusInput();
-        this.refs.dateDropdown.setOpen(false); 
+        this.dateRef.current.setOpen(false);
     }
+
+    //componentDidUpdate() {
+    //    this.dateRef.current.setOpen(false);
+    //}
 
     getCustomerData() {
         fetch("/Customer/GetList")
@@ -121,9 +123,8 @@ export class AddSalesModal extends React.Component {
     }
 
     handleDateChange(date) {
+        this.dateRef.current.setOpen(false);
         this.setState({ curDate: date });
-        this.refs.dateDropdown.cancelFocusInput();
-        this.refs.dateDropdown.setOpen(false);
     }
 
     render() {
@@ -137,16 +138,18 @@ export class AddSalesModal extends React.Component {
                 <form className="ui form" id="add_Sales_Form">
                     <div className="ui segment">
                         <div className="field">
-                            <input type="hidden"></input>
+                            <input type="hidden" autoFocus></input>
                             <label> Date &nbsp; </label>
                             <Datepicker selected={this.state.curDate}
-                                ref="dateDropdown"
-                                onChange={(date) => this.handleDateChange(date)} />
+                                ref={this.dateRef}
+                                onChange={(date) => this.handleDateChange(date)}
+                                 />
                         </div>
 
                         <div className="field" style={{ width: "40%" }}>
                             <div className="ui text">Product </div>
                             <Dropdown options={this.state.productOptions} name="ProductId"
+                                
                                 floating button scrolling fluid
                                 onChange={(e, { value }) => this.handleProductChange(event, value)}
                                 placeholder={"Select Product"} />
@@ -192,16 +195,18 @@ export class EditSalesModal extends React.Component {
             CustomerId: "",
             StoreId: "",
             ProductId: "",
-            curDate: new Date()
+            curDate: new Date(),
+            flag: false
         }
         this.handleEditSales = this.handleEditSales.bind(this);
+        this.myRef = React.createRef();
     }
-
 
     componentDidMount() {
         this.getCustomerData();
         this.getProductData();
         this.getStoreData();
+        this.myRef.current.setOpen(false);
     }
 
     getCustomerData() {
@@ -299,19 +304,21 @@ export class EditSalesModal extends React.Component {
     }
 
     render() {
-        let salesDate = this.props.sales.DateSold;
+        let dateSold = this.props.DateSold;
+        
         return (
             <div className="ui small modal" id={this.props.id}>
                 <i className="close icon" />
                 <div className="header">
                     Edit Sales
                 </div>
-                <form className="ui form" id="edit_Sales_Form">
+                <form className="ui form" id="edit_Sales_Form" >
                     <div className="ui segment">
                         <div className="field">
                             <label> Date &nbsp; </label>
                             <Datepicker 
-                                selected={salesDate}
+                                ref={this.myRef}
+                                selected={dateSold}
                                 onChange={(date) => this.handleDateChange(date)} />
                         </div>
 

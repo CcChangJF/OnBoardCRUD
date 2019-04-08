@@ -100,12 +100,15 @@ export class EditCustomerModal extends React.Component {
     }
 
     componentDidMount() {
+        this.updateNameAddr(this.props.customer);
+    }
 
+    updateNameAddr(customer) {
+        this.setState({ Name: customer.Name });
+        this.setState({ Address: customer.Address });
     }
 
     render() {
-        let customerName = this.props.customer.Name;
-        let customerAddr = this.props.customer.Address;
         return (
             <div className="ui small modal" id={this.props.id}>
                 <i className="close icon" />
@@ -116,12 +119,12 @@ export class EditCustomerModal extends React.Component {
                     <div className="ui segment">
                         <div className="field">
                             <label >Name</label>
-                            <input type="text" id="EditName" name="Name" value={customerName}
+                            <input type="text" id="EditName" name="Name" value={this.state.Name}
                                 onChange={event => this.handleInputChange(event)} />
                         </div>
                         <div className="field">
                             <label>Address</label>
-                            <input type="text" id="EditAddress" name="Address" value={customerAddr}
+                            <input type="text" id="EditAddress" name="Address" value={this.state.Address}
                                 onChange={event => this.handleInputChange(event)} /> 
                         </div>
                     </div>

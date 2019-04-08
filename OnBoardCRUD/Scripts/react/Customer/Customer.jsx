@@ -24,6 +24,7 @@ export class CustomerTable extends React.Component {
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.add = this.add.bind(this);
+        this.editModalRef = React.createRef();
     }
 
     componentDidMount() {
@@ -67,9 +68,11 @@ export class CustomerTable extends React.Component {
     }
 
     update(customer) {
-        const editModal = <EditCustomerModal id={"customer_Edit_Modal"}
+        const editModal = <EditCustomerModal ref={this.editModalRef}
+            id={"customer_Edit_Modal"}
             customer={customer} updateTableData={() => this.loadData()} />;
         ReactDOM.render(editModal, document.getElementById('edit_Modal_Div'));
+        this.editModalRef.current.updateNameAddr(customer);
         $('#customer_Edit_Modal').modal('show');
     }
 

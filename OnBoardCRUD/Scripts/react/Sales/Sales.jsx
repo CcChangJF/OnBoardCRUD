@@ -66,7 +66,6 @@ export class SalesTable extends React.Component {
             )
     }
 
-
     add() {
         const addModal = <AddSalesModal id={"sales_Add_Modal"}
             customers={this.state.customers}
